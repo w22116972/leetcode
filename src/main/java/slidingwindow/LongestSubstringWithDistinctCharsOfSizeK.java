@@ -13,13 +13,33 @@ import java.util.concurrent.ConcurrentHashMap;
 //Output: 5
 //Explanation: The longest substrings with no more than '3' distinct characters are "cbbeb" & "bbebi".
 public class LongestSubstringWithDistinctCharsOfSizeK {
-    public static void main(String[] args) {
-        assert findLength("araaci", 2) == 4;
-        assert findLength("araaci", 1) == 2;
-        assert findLength("cbbebi", 3) == 5;
 
+    public static int sol1(String s, int k) {
+        int windowStartIndex = 0;
+        int maxWindowLength = 0;
+        ConcurrentHashMap<Character, Integer> basket = new ConcurrentHashMap<>(k);
+        for (int windowEndIndex = 0; windowEndIndex < s.length(); windowEndIndex++) {
+            final char currentChar = s.charAt(windowEndIndex);
+            if (basket.contains(currentChar)) {
+                basket.put(currentChar, basket.get(currentChar) + 1);
+            } else {
+                basket.put(currentChar, 1);
+            }
+            while (basket.size() > k) {
+                final char toShrinkChar = s.charAt(windowStartIndex);
+                basket.put(toShrinkChar, basket.get(toShrinkChar) - 1);
+                if (basket.get(toShrinkChar) == 0) {
+                    basket.remove(toShrinkChar);
+                }
+                windowStartIndex++;
+            }
+            maxWindowLength = Math.max(maxWindowLength, windowEndIndex - windowStartIndex + 1);
+        }
+        return maxWindowLength;
     }
-    public static int findLength(String str, int k) {
+
+
+    public static int sol(String str, int k) {
         ConcurrentHashMap<Character, Integer> chars = new ConcurrentHashMap<Character, Integer>();
         int startIndex = 0;
         int maxLength = 0;

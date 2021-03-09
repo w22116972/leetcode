@@ -1,8 +1,14 @@
 package twopointers;
 
+// Since we have to traverse whole array and also compare with previous elements, we have to use two pointers.
+// One is to traverse whole array. And the other is to point to the index that contains the last deduplicate value.
+
+
 
 //        Problem Statement
-//        Given an array of sorted numbers, remove all duplicates from it. You should not use any extra space; after removing the duplicates in-place return the new length of the array.
+//        Given an array of sorted numbers, remove all duplicates from it.
+//        You should not use any extra space;
+//        after removing the duplicates in-place return the new length of the array.
 //        Example 1:
 //        Input: [2, 3, 3, 3, 6, 9, 9]
 //        Output: 4
@@ -13,12 +19,6 @@ package twopointers;
 //        Explanation: The first two elements after removing the duplicates will be [2, 11].
 
 public class RemoveDuplicate {
-
-    public static void main(String[] args) {
-        assert sol(new int[]{2, 3, 3, 3, 6, 9, 9}) == 4;
-        assert sol(new int[]{2, 2, 2, 11}) == 2;
-    }
-
     // note: 只需要回傳長度，不需要整個陣列
     // 一個走訪索引指標: 走訪每個元素
     // 一個去重元素索引指標: 指向的索引為下一個去重值要覆蓋並放進來的索引
@@ -38,5 +38,7 @@ public class RemoveDuplicate {
         }
         return deduplicateIndex;
     }
+
+
 
 }

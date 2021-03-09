@@ -16,32 +16,10 @@ import java.util.concurrent.ConcurrentHashMap;
         Explanation: The numbers at index 0 and 2 add up to 11: 2+9=11
 */
 public class PairWithTargetSum {
-    public static void main(String[] args) {
-        final int[] ans1 = pairTargetSum(new int[]{1, 2, 3, 4, 6}, 6);
-        assert ans1[0] == 1;
-        assert ans1[1] == 3;
-        final int[] ans2 = pairTargetSum(new int[]{2, 5, 9, 11}, 11);
-        assert ans2[0] == 0;
-        assert ans2[1] == 2;
-
-        final int[] ans3 = traverseOppositeDirections(new int[]{1, 2, 3, 4, 6}, 6);
-        assert ans3[0] == 1;
-        assert ans3[1] == 3;
-        final int[] ans4 = traverseOppositeDirections(new int[]{2, 5, 9, 11}, 11);
-        assert ans4[0] == 0;
-        assert ans4[1] == 2;
-
-        final int[] ans5 = hashTable(new int[]{1, 2, 3, 4, 6}, 6);
-        assert ans5[0] == 1;
-        assert ans5[1] == 3;
-        final int[] ans6 = hashTable(new int[]{2, 5, 9, 11}, 11);
-        assert ans6[0] == 0;
-        assert ans6[1] == 2;
-    }
 
     // both start in same direction
     // T = O(^2)
-    public static int[] pairTargetSum(int[] arr, int target) {
+    public static int[] traverseSameDirection(int[] arr, int target) {
         for (int slow = 0; slow < arr.length - 1; slow++) {
             for (int fast = slow + 1; fast < arr.length; fast++) {
                 if (arr[slow] + arr[fast] == target) {

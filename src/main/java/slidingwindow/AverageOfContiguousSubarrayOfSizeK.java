@@ -5,32 +5,23 @@ package slidingwindow;
 // output: [2.2, 2.8, 2.4, 3.6, 2.8]
 
 public class AverageOfContiguousSubarrayOfSizeK {
-
-    public static void main(String[] args) {
-        final double[] averages2 = findAverages2(5, new int[]{1, 3, 2, 6, -1, 4, 1, 8, 2});
-        for (double v : averages2) {
-            System.out.println(v);
-        }
-    }
-
-    public static double[] findAverages2(int k, int[] arr) {
+    public static double[] sol(int k, int[] arr) {
         double[] result = new double[arr.length - k + 1];
         double windowSum = 0;
-        int startIndex = 0;
-        for (int i = startIndex; i < k; i++) {
-            windowSum += arr[i];
-        }
-        result[startIndex] = windowSum/k;
-        for (int endIndex = k; endIndex < arr.length; endIndex++) {
-            windowSum -= arr[startIndex];
-            windowSum += arr[endIndex];
-            startIndex++;
-            result[startIndex] = windowSum / k;
+        int windowStartIndex = 0;
+        for (int windowEndIndex = 0; windowEndIndex < arr.length; windowEndIndex++) {
+            windowSum += arr[windowEndIndex];
+            //
+            if (windowEndIndex - windowStartIndex + 1 >= k) { // when windows size is k
+                result[windowStartIndex] = windowSum / k;
+                windowSum -= arr[windowStartIndex];
+                windowStartIndex++;
+            }
         }
         return result;
     }
 
-    public static double[] findAverages(int k, int[] arr) {
+    public static double[] sol22(int k, int[] arr) {
         double[] result = new double[arr.length - k + 1];
         double windowSum = 0;
         int startIndex = 0;

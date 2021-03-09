@@ -12,20 +12,6 @@ import java.util.List;
 //        Input: [-3, -1, 0, 1, 2]
 //        Output: [0 1 1 4 9]
 public class SquareSortedArray {
-    public static void main(String[] args) {
-        int[] input1 = new int[]{-2, -1, 0, 2, 3};
-        int[] input2 = new int[]{-3, -1, 0, 1, 2};
-
-        for (int i: squareArray(input1)) {
-            System.out.print(i);
-        }
-
-        System.out.println("\n---");
-        for (int i: squareArray(input2)) {
-            System.out.print(i);
-        }
-
-    }
 
     public static int[] squareArray(int[] arr) {
         int[] result = new int[arr.length];
@@ -42,12 +28,33 @@ public class SquareSortedArray {
             }
             insertIndex--;
         }
-//        int[] result = new int[arr.length];
-//        int j = 0;
-//        for (int i = temp.size()-1; i >= 0; i --) {
-//            result[j] = temp.get(i);
-//            j++;
-//        }
         return result;
     }
+
+    public static int[] sol(int[] arr) {
+        // Since the larger number could be near the front and back of array,
+        // we should use two pointers to trace front and back.
+        // After comparing which one is the larger square number, we could put this number into latter part of result array.
+        // The order to insert into result array should be starting from the end to the beginning.
+        int frontIndex = 0;
+        int backIndex = arr.length - 1;
+        int[] result = new int[arr.length];
+        int insertIndexOfResult = arr.length - 1;
+        while (frontIndex < backIndex) {
+            final int frontNumber = arr[frontIndex] * arr[frontIndex];
+            final int backNumber = arr[backIndex] * arr[backIndex];
+            final int largerNumber = Math.max(frontNumber, backNumber);
+            if (frontNumber > backNumber) {
+                frontIndex++;
+            } else {
+                backIndex--;
+            }
+            result[insertIndexOfResult] = largerNumber;
+            insertIndexOfResult--;
+        }
+        result[insertIndexOfResult] = arr[frontIndex];
+        return result;
+    }
+
+
 }
