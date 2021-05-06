@@ -33,20 +33,21 @@ public class AverageOfContiguousSubarrayOfSizeK {
                 startIndex++;
             }
         }
+        return result;
+    }
 
-
-//        double[] result = new double[arr.length - K + 1];
-//        double windowSum = 0;
-//        int windowStart = 0;
-//        for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-//            windowSum += arr[windowEnd]; // add the next element
-//            // slide the window, we don't need to slide if we've not hit the required window size of 'k'
-//            if (windowEnd >= K - 1) {
-//                result[windowStart] = windowSum / K; // calculate the average
-//                windowSum -= arr[windowStart]; // subtract the element going out
-//                windowStart++; // slide the window ahead
-//            }
-//        }
+    public static double[] practice(int k, int[] arr) {
+        double[] result = new double[arr.length - k + 1];
+        double windowSum = 0;
+        int startIndex = 0;
+        for (int endIndex = 0; endIndex < arr.length; endIndex++) {
+            windowSum += arr[endIndex];
+            if (endIndex - startIndex + 1 >= k) {
+                result[startIndex] = windowSum / k;
+                windowSum -= arr[startIndex];
+                startIndex++;
+            }
+        }
         return result;
     }
 }

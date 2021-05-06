@@ -21,4 +21,10 @@ public class AverageOfContiguousSubarrayOfSizeKTest {
         Assertions.assertArrayEquals(answer, AverageOfContiguousSubarrayOfSizeK.sol(k, arr));
     }
 
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void practiceTest(int k, int[] arr, double[] answer) {
+        Assertions.assertArrayEquals(answer, AverageOfContiguousSubarrayOfSizeK.practice(k, arr));
+    }
+
 }
