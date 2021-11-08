@@ -24,4 +24,11 @@ public class SquareSortedArrayTest {
     public void sol(int[] arr, int[] answer) {
         Assertions.assertArrayEquals(answer, SquareSortedArray.sol(arr));
     }
+
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void practice(int[] arr, int[] answer) {
+        Assertions.assertArrayEquals(answer, SquareSortedArray.practice(arr));
+    }
 }

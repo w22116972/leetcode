@@ -59,10 +59,6 @@ public class TripletSumToZero {
     }
 
 
-
-
-
-
     public static List<List<Integer>> findTriplet(int[] arr) {
         Arrays.sort(arr);
         List<List<Integer>> triplet = new ArrayList<>();
@@ -98,6 +94,51 @@ public class TripletSumToZero {
                 start++;
             } else if (k <= currentSum) {
                 end--;
+            }
+        }
+    }
+
+    public static List<List<Integer>> practice(int[] arr) {
+        Arrays.sort(arr); // nlogn
+        List<List<Integer>> result = new ArrayList<>();
+        // Since y + z = -x, we see -x as target sum
+        for (int x = 0; x < arr.length - 2; x++) {
+            if (x >= 1 && arr[x] == arr[x - 1]) {
+                continue;
+            }
+            twoSum(arr, -x, x + 1, result);
+        }
+        return result;
+
+        // Iterate x from index 0 to index arr.length - 2
+        // The reason why maximum of x is length of array minus 3
+        // is that since we see x as the left-most value for triplets.
+        // So y and z are right next to x (arr.length - 2, arr.length - 1)
+//        for (int x = 0; x < arr.length - 2; x++) {
+//            // To skip duplicate value of x, we have to check whether current value of x is same as previous one
+//            if (x > 0 && arr[x] == arr[x-1]) {
+//                continue;
+//            }
+//            putPairToTriplets(arr, -arr[x], x + 1, triplets);
+//
+//        }
+//        return triplets;
+    }
+
+    // target is -x
+    public static void twoSum(int[] arr, int target, int headIndex, List<List<Integer>> result) {
+        int tailIndex = arr.length - 1;
+        while (headIndex < tailIndex) {
+            // y + z
+            final int currentSum = arr[headIndex] + arr[tailIndex];
+            if (currentSum == target) {
+                result.add(List.of(-target, headIndex, tailIndex));
+                headIndex++;
+                tailIndex--;
+            } else if (currentSum < target) {
+                headIndex++;
+            } else if (currentSum > target) {
+                tailIndex--;
             }
         }
     }

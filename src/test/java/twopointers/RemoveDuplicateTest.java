@@ -19,4 +19,11 @@ public class RemoveDuplicateTest {
         Assertions.assertEquals(answer, RemoveDuplicate.sol(arr));
     }
 
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void practice(int[] arr, int answer) {
+        Assertions.assertEquals(answer, RemoveDuplicate.practice(arr));
+    }
+
+
 }

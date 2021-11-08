@@ -1,12 +1,13 @@
 package bfs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class LevelOrderTraversal {
     public static List<List<Integer>> traverse(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new LinkedList<>();
 
         return result;
     }

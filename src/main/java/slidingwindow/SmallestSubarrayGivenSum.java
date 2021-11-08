@@ -27,4 +27,19 @@ public class SmallestSubarrayGivenSum {
         }
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
     }
+
+    public static int practice(int targetSum, int[] arr) {
+        int sumOfSubarray = 0;
+        int minLengthOfSubarray = Integer.MAX_VALUE;
+        int headIndexOfSubarray = 0;
+        for (int tailIndexOfSubarray = 0; tailIndexOfSubarray < arr.length; tailIndexOfSubarray++) {
+            sumOfSubarray += arr[tailIndexOfSubarray];
+            while (sumOfSubarray >= targetSum) {
+                minLengthOfSubarray = Math.min(minLengthOfSubarray, tailIndexOfSubarray - headIndexOfSubarray + 1);
+                sumOfSubarray -= arr[headIndexOfSubarray];
+                headIndexOfSubarray++;
+            }
+        }
+        return minLengthOfSubarray;
+    }
 }

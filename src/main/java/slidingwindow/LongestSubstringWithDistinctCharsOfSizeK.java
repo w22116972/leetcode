@@ -1,5 +1,6 @@
 package slidingwindow;
 
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 //Given a string, find the length of the longest substring in it with no more than K distinct characters.
@@ -62,5 +63,44 @@ public class LongestSubstringWithDistinctCharsOfSizeK {
         }
 
         return maxLength;
+    }
+
+    public static int practice(String str, int k) {
+        // declare head index of subarray
+        int headIndexOfSubstring = 0;
+        // since condition is distinct, we need to use hash map to distinct
+        HashMap<Character, Integer> distinctCharsCount = new HashMap<>();
+        // requirement states that we have to find the longest, hence we need a variable to hold longest length
+        int longestLengthOfSubstring = Integer.MIN_VALUE;
+
+        final char[] charArray = str.toCharArray();
+        for (int tailIndexOfSubstring = 0; tailIndexOfSubstring < charArray.length; tailIndexOfSubstring++) {
+            // moves tail of window
+            final char tailChar = charArray[tailIndexOfSubstring];
+            if (distinctCharsCount.containsKey(tailChar)) {
+                distinctCharsCount.put(tailChar, distinctCharsCount.get(tailChar) + 1);
+            } else {
+                distinctCharsCount.put(tailChar, 1);
+            }
+            // check correctness after moving tail of window
+            while (distinctCharsCount.size() > k) {
+                final char headChar = charArray[headIndexOfSubstring];
+                // remove head char of substring
+                // if count of head char is 1, then directly remove the entire key
+                // else count--
+                if (distinctCharsCount.get(headChar) == 1) {
+                    distinctCharsCount.remove(headChar);
+                } else {
+                    distinctCharsCount.put(headChar, distinctCharsCount.get(headChar) - 1);
+                }
+                // head index ++
+                headIndexOfSubstring++;
+            }
+
+            // compare current length with longest length
+            final int currentLengthOfSubstring = tailIndexOfSubstring - headIndexOfSubstring + 1;
+            longestLengthOfSubstring = Math.max(currentLengthOfSubstring, longestLengthOfSubstring);
+        }
+        return longestLengthOfSubstring;
     }
 }

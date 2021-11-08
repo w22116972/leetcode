@@ -63,4 +63,22 @@ public class PairWithTargetSum {
         }
         return new int[]{-1, -1};
     }
+
+    public static int[] practice(int[] arr, int target) {
+        // declare pair of pointers that adding up to target
+        // it's sorted array, we could use 2 pointers at start and end
+        int headIndex = 0;
+        int tailIndex = arr.length - 1;
+        while (headIndex < tailIndex) {
+            int currentSum = arr[headIndex] + arr[tailIndex];
+            if (currentSum == target) {
+                return new int[] {headIndex, tailIndex};
+            } else if (currentSum < target) {
+                headIndex++;
+            } else if (currentSum > target) {
+                tailIndex--;
+            }
+        }
+        return new int[]{-1, -1};
+    }
 }

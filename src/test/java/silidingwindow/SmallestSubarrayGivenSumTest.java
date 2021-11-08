@@ -19,4 +19,10 @@ public class SmallestSubarrayGivenSumTest {
     public void testSol(int s, int[] arr, int answer) {
         Assertions.assertEquals(answer, SmallestSubarrayGivenSum.sol(s, arr));
     }
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void testPractice(int s, int[] arr, int answer) {
+        Assertions.assertEquals(answer, SmallestSubarrayGivenSum.practice(s, arr));
+    }
 }

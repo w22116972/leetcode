@@ -20,4 +20,11 @@ public class MaxSumSubarrayOfSizeKTest {
         Assertions.assertEquals(answer, MaxSumSubarrayOfSizeK.findMaxSumSubArray(k, arr));
         Assertions.assertEquals(answer, MaxSumSubarrayOfSizeK.sol2(k, arr));
     }
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void solPractice(int k, int[] arr, int answer) {
+        Assertions.assertEquals(answer, MaxSumSubarrayOfSizeK.practice(k, arr));
+    }
+
 }

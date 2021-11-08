@@ -1,5 +1,8 @@
 package slidingwindow;
 
+import scala.Char;
+
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 /*
@@ -70,5 +73,49 @@ public class FruitsToBaskets {
             maxLength = Math.max(maxLength, windowEnd - windowsStart + 1);
         }
         return maxLength;
+    }
+
+    public static int practice(char[] arr) {
+        // since 2 baskets could only contain one type (distinct) of fruit(char) -> at most 2 distinct char
+
+        // contain distinct char
+        HashMap<Character, Integer> window = new HashMap<>();
+
+        // return max length -> declare min length for comparing
+        int maxLengthOfSubstring = Integer.MIN_VALUE;
+
+        // declare head index of substring
+        int headIndexOfSubstring = 0;
+
+        // declare basket number
+        final int basketNumber = 2;
+
+        // declare tail index of substring and start to move window
+        for (int tailIndexOfSubstring = 0; tailIndexOfSubstring < arr.length; tailIndexOfSubstring++) {
+            // put tail char to window
+            final char tailChar = arr[tailIndexOfSubstring];
+            if (window.containsKey(tailChar)) {
+                window.put(tailChar, window.get(tailChar) + 1);
+            } else {
+                window.put(tailChar, 1);
+            }
+
+            // check correctness after moving tail char in windows
+            while (window.size() > basketNumber) {
+                // remove head char
+                final char headChar = arr[headIndexOfSubstring];
+                if (window.get(headChar) == 1) {
+                    window.remove(headChar);
+                } else {
+                    window.put(headChar, window.get(headChar) - 1);
+                }
+                headIndexOfSubstring++;
+            }
+
+            // comparing existing correct length with longest length
+            final int currentLengthOfSubstring = tailIndexOfSubstring - headIndexOfSubstring + 1;
+            maxLengthOfSubstring = Math.max(currentLengthOfSubstring, maxLengthOfSubstring);
+        }
+        return maxLengthOfSubstring;
     }
 }

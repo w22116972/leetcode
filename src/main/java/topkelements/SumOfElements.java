@@ -24,6 +24,5 @@ public class SumOfElements {
         }
         return count;
     }
-
 }
 

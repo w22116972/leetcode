@@ -16,8 +16,14 @@ public class LongestSubstringWithDistinctCharsOfSizeKTest {
 
     @ParameterizedTest
     @MethodSource("testData")
-    public void solTest(String s, int k, int answer) {
+    public void testSol(String s, int k, int answer) {
 //        Assertions.assertEquals(answer, LongestSubstringWithDistinctCharsOfSizeK.findLength(s, k));
         Assertions.assertEquals(answer, LongestSubstringWithDistinctCharsOfSizeK.sol1(s, k));
+    }
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void testPractice(String s, int k, int answer) {
+        Assertions.assertEquals(answer, LongestSubstringWithDistinctCharsOfSizeK.practice(s, k));
     }
 }

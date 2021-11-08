@@ -56,5 +56,26 @@ public class SquareSortedArray {
         return result;
     }
 
+    public static int[] practice(int[] arr) {
+        //
+        int positiveIndex = arr.length - 1;
+        int negativeIndex = 0;
+        int i = arr.length - 1;
+        final int[] result = new int[arr.length];
+        while (negativeIndex <= positiveIndex) {
+            final int squaredNumberOnNegativeSide = (int) Math.pow(arr[negativeIndex], 2);
+            final int squaredNumberOnPositiveSide = (int) Math.pow(arr[positiveIndex], 2);
+            if (squaredNumberOnNegativeSide >= squaredNumberOnPositiveSide) {
+                result[i] = squaredNumberOnNegativeSide;
+                negativeIndex++;
+            } else {
+                result[i] = squaredNumberOnPositiveSide;
+                positiveIndex--;
+            }
+            i--;
+        }
+        return result;
+    }
+
 
 }

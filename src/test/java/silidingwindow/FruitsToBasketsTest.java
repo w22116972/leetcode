@@ -20,4 +20,11 @@ public class FruitsToBasketsTest {
     public void solTest(char[] arr, int answer) {
         Assertions.assertEquals(answer, FruitsToBaskets.sol1(arr));
     }
+
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void testPractice(char[] arr, int answer) {
+        Assertions.assertEquals(answer, FruitsToBaskets.practice(arr));
+    }
 }

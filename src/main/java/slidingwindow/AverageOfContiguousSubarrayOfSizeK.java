@@ -21,6 +21,7 @@ public class AverageOfContiguousSubarrayOfSizeK {
         return result;
     }
 
+    @Deprecated
     public static double[] sol22(int k, int[] arr) {
         double[] result = new double[arr.length - k + 1];
         double windowSum = 0;
@@ -39,13 +40,15 @@ public class AverageOfContiguousSubarrayOfSizeK {
     public static double[] practice(int k, int[] arr) {
         double[] result = new double[arr.length - k + 1];
         double windowSum = 0;
-        int startIndex = 0;
-        for (int endIndex = 0; endIndex < arr.length; endIndex++) {
-            windowSum += arr[endIndex];
-            if (endIndex - startIndex + 1 >= k) {
-                result[startIndex] = windowSum / k;
-                windowSum -= arr[startIndex];
-                startIndex++;
+        int start = 0;
+        for (int end = 0; end < arr.length; end++) {
+            windowSum += arr[end];
+            if (end - start + 1 >= k) {
+                // compute result
+                result[start] = windowSum / k;
+                // start moves
+                windowSum -= arr[start];
+                start += 1;
             }
         }
         return result;

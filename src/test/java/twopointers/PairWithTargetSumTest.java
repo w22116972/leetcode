@@ -30,4 +30,10 @@ public class PairWithTargetSumTest {
     public void traverseSameDirectionsTest(int[] arr, int target, int[] answer) {
         Assertions.assertArrayEquals(answer, PairWithTargetSum.traverseSameDirection(arr, target));
     }
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void practiceTest(int[] arr, int target, int[] answer) {
+        Assertions.assertArrayEquals(answer, PairWithTargetSum.practice(arr, target));
+    }
 }

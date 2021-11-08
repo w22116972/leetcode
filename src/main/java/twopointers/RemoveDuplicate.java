@@ -39,6 +39,21 @@ public class RemoveDuplicate {
         return deduplicateIndex;
     }
 
+    public static int practice(int[] arr) {
+        if (arr.length == 0) {
+            return 0;
+        }
+        // Since array is sorted, we only need to compare preceding element to know what it is
+        int deduplicateLength = 1;
+        for (int i = 1; i < arr.length; i++) {
+            int lastDeduplicateIndex = deduplicateLength - 1;
+            if (arr[i] != arr[lastDeduplicateIndex]) {
+                arr[lastDeduplicateIndex + 1] = arr[i];
+                deduplicateLength++;
+            }
+        }
+        return deduplicateLength;
+    }
 
 
 }

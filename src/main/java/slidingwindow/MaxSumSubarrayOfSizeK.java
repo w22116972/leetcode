@@ -57,4 +57,32 @@ public class MaxSumSubarrayOfSizeK {
 
         return maxSum;
     }
+
+    public static int practice(int k, int[] arr) {
+        int maxLengthOfSubarray = k;
+
+        // find max sum -> declare min then compare
+        int maxSumOfSubarray = Integer.MIN_VALUE;
+
+        // declare sum of subarray
+        int sumOfSubarray = 0;
+
+        // declare head index of subarray
+        int headIndexOfSubarray = 0;
+
+        // declare tail index of subarray and move window
+        for (int tailIndexOfSubarray = 0; tailIndexOfSubarray < arr.length; tailIndexOfSubarray++) {
+            // add tail to window
+            sumOfSubarray += arr[tailIndexOfSubarray];
+            // validate subarray
+            final int lengthOfSubarray = tailIndexOfSubarray - headIndexOfSubarray + 1;
+            if (lengthOfSubarray > maxLengthOfSubarray) {
+                sumOfSubarray -= arr[headIndexOfSubarray];
+                headIndexOfSubarray++;
+            }
+            // compare sum of subarray
+            maxSumOfSubarray = Math.max(maxSumOfSubarray, sumOfSubarray);
+        }
+        return maxSumOfSubarray;
+    }
 }
