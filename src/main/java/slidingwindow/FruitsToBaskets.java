@@ -1,7 +1,5 @@
 package slidingwindow;
 
-import scala.Char;
-
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 

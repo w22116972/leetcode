@@ -3,11 +3,34 @@ package bfs;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 
 public class LevelOrderTraversal {
     public static List<List<Integer>> traverse(TreeNode root) {
         List<List<Integer>> result = new LinkedList<>();
+        if (root == null) {
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            final int sizeOfLevel = queue.size();
+            final LinkedList<Integer> valuesInLevel = new LinkedList<>();
+            for (int i = 0; i < sizeOfLevel; i++) {
+                final TreeNode node = queue.poll();
+                if (node != null) {
+                    valuesInLevel.add(node.val);
+                    if (node.left != null) {
+                        queue.add(node.left);
+                    }
+                    if (node.right != null) {
+                        queue.add(node.right);
+                    }
+                }
+            }
+            result.add(valuesInLevel);
+        }
 
         return result;
     }

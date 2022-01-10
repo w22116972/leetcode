@@ -1,7 +1,5 @@
 package twopointers;
 
-import scala.Char;
-
 // edge case:
 
 public class ComparingStringsContainBackspaces {

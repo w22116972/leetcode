@@ -51,7 +51,6 @@ public class nQueens {
             // 3. cancel the choice
             board[row][col] = '.';
         }
-
     }
 
 
