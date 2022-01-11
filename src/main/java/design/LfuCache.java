@@ -22,65 +22,83 @@ public class LfuCache {
         if (!keyToValue.containsKey(key)) {
             return -1;
         }
-        int oldFreq = keyToFreq.get(key);
-        // update keyToFreq
-        keyToFreq.remove(key);
-        int newFreq = oldFreq + 1;
-        keyToFreq.put(key, newFreq);
-        // update freqToKeys
-        // remove old key in freqToKeys
-        freqToKeys.get(oldFreq).remove(key);
-        // if oldFreq == minFreq and only one ele in freqToKeys
-        if (oldFreq == minFreq && freqToKeys.get(oldFreq).isEmpty()) {
-            minFreq = newFreq;
-            freqToKeys.remove(oldFreq);
-        }
-        // add new freq with key to freqToKeys
-        freqToKeys.putIfAbsent(newFreq, new LinkedHashSet<>());
-        final LinkedHashSet<Integer> keys = freqToKeys.get(newFreq);
-        keys.add(key);
-        freqToKeys.put(newFreq, keys);
-//        freqToKeys.get(newFreq).add(key);
-
+        increaseFreq(key);
         return keyToValue.get(key);
     }
 
-    public void put(int key, int value) {
-        if (capacity == keyToValue.size()) {
-            int freq = keyToFreq.get(key);
-            final LinkedHashSet<Integer> keys = freqToKeys.get(minFreq);
-            int oldestKeyByMinFreq = keys.stream().findFirst().get();
-
+    private void removeMinFreqKey() {
+        final LinkedHashSet<Integer> keysByMinFreq = freqToKeys.get(minFreq);
+        int oldestKeyByMinFreq = keysByMinFreq.stream().findFirst().get();
+        keysByMinFreq.remove(oldestKeyByMinFreq);
+        if (keysByMinFreq.isEmpty()) {
+            freqToKeys.remove(minFreq);
         }
-        // now it is safe to put
-        // update keyToValue
-        keyToValue.put(key, value);
+        keyToValue.remove(oldestKeyByMinFreq);
+        keyToFreq.remove(oldestKeyByMinFreq);
+    }
 
-        if (keyToFreq.containsKey(key)) {  // this is old key
-            int oldFreq = keyToFreq.get(key);
-            int newFreq = oldFreq + 1;
-            keyToFreq.put(key, newFreq);
-            freqToKeys.get(oldFreq).remove(key);
-            if (freqToKeys.get(oldFreq).size() == 0) {
-                freqToKeys.remove(oldFreq);
-                if (minFreq == oldFreq) {
-                    minFreq = newFreq;
-                }
+    private void increaseFreq(int key) {
+        final int oldFreq = keyToFreq.get(key);
+        final int newFreq = oldFreq + 1;
+        // update keyToFreq
+        keyToFreq.put(key, newFreq);
+
+        // update freqToKeys for oldFreq
+        final LinkedHashSet<Integer> keysByOldFreq = freqToKeys.get(oldFreq);
+        keysByOldFreq.remove(key);
+        freqToKeys.put(oldFreq, keysByOldFreq);
+        // update freqToKeys for newFreq
+        freqToKeys.putIfAbsent(newFreq, new LinkedHashSet<>());
+        final LinkedHashSet<Integer> keysByNewFreq = freqToKeys.get(newFreq);
+        keysByNewFreq.add(key);
+        freqToKeys.put(newFreq, keysByNewFreq);
+
+        // check empty case
+        if (freqToKeys.get(oldFreq).isEmpty()) {
+            freqToKeys.remove(oldFreq);
+            if (oldFreq == minFreq) {
+                minFreq++;
             }
-
-            final LinkedHashSet<Integer> keys = freqToKeys.get(newFreq);
-            keys.add(key);
-            freqToKeys.put(newFreq, keys);
-
-        } else {
-            int newFreq = 1;
-            keyToFreq.put(key, newFreq);
-            minFreq = newFreq;
-            freqToKeys.putIfAbsent(newFreq, new LinkedHashSet<>());
-
-            final LinkedHashSet<Integer> keys = freqToKeys.get(newFreq);
-            keys.add(key);
-            freqToKeys.put(newFreq, keys);
         }
+    }
+
+    public void put(int key, int value) {
+        if (capacity <= 0) {
+            return;
+        }
+        if (keyToValue.containsKey(key)) {
+            keyToValue.put(key, value);
+            increaseFreq(key);
+            return;
+        }
+        // if key is not existing in cache
+
+        if (capacity <= keyToValue.size()) {
+            removeMinFreqKey();
+        }
+        keyToValue.put(key, value);
+        keyToFreq.put(key, 1);
+        freqToKeys.putIfAbsent(1, new LinkedHashSet<>());
+        freqToKeys.get(1).add(key);
+        minFreq = 1;
+    }
+
+    // ["LFUCache","put","put","put","put","get"]
+    //[[2],[3,1],[2,1],[2,2],[4,4],[2]]
+
+//    ["LFUCache","put","get"]
+//            [[0],[0,0],[0]]
+
+    public static void main(String[] args) {
+        final LfuCache cache = new LfuCache(0);
+        cache.put(0, 0);
+        cache.get(0);
+
+//        final LfuCache cache = new LfuCache(2);
+//        cache.put(3, 1);
+//        cache.put(2, 1);
+//        cache.put(2, 2);
+//        cache.put(4, 4);
+//        cache.get(2);
     }
 }
