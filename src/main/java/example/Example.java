@@ -1,7 +1,7 @@
 package example;
 
 public class Example {
-    public void sol() {
+    public static void main(String[] args) {
 
     }
 }

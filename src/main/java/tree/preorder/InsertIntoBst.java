@@ -14,9 +14,8 @@ public class InsertIntoBst {
             // assume root of left subtree will be return of root of newly inserted tree given root of left subtree
             root.left = insertIntoBstRecursively(root.left, val);
         }
-
         // go right
-        if (root.val < val) {
+        else if (root.val < val) {
             // assume root of right subtree will be return of root of newly inserted tree given root of right subtree
             root.right = insertIntoBstRecursively(root.right, val);
         }

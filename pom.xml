@@ -23,7 +23,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>11</release>
+          <release>17</release>
         </configuration>
       </plugin>
     </plugins>
@@ -40,6 +40,11 @@
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.4.0</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-cypher-dsl</artifactId>
+      <version>2022.4.0</version>
     </dependency>
 
     <dependency>
