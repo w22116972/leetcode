@@ -4,17 +4,17 @@ public class UniquePath {
     public int uniquePaths(int m, int n) {
         return getNumberOfWaysAt(m - 1, n - 1);
     }
-    private int getNumberOfWaysAt(int i, int j) {
-        if (i == 0 && j == 0) {
+    private int getNumberOfWaysAt(int row, int col) {
+        if (row == 0 && col == 0) {
             return 1;
-        } else if (i == 1 && j == 0) {
+        } else if (row == 1 && col == 0) {
             return 1;
-        } else if (i == 0 && j == 1) {
+        } else if (row == 0 && col == 1) {
             return 1;
-        } else if (i < 0 || j < 0) {
+        } else if (row < 0 || col < 0) {
             return 0;
         }
-        return getNumberOfWaysAt(i - 1, j) + getNumberOfWaysAt(i, j - 1);
+        return getNumberOfWaysAt(row - 1, col) + getNumberOfWaysAt(row, col - 1);
     }
 
     int memo[][];

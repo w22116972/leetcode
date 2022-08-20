@@ -1,4 +1,4 @@
-package mergeinterval;
+package interval;
 
 public class ConflictingAppointments {
 
