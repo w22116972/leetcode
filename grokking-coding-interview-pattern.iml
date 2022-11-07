@@ -2,7 +2,8 @@
 <module version="4">
   <component name="FacetManager">
     <facet type="Python" name="Python">
-      <configuration sdkName="Python 3.7 (coding-interview-pattern)" />
+      <configuration sdkName="Python 3.10" />
     </facet>
   </component>
+  <component name="Go" enabled="true" />
 </module>

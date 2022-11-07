@@ -6,20 +6,23 @@ class Node:
         self.prev = None
         self.next = None
 
+
 # use head and tail as dummy nodes (its next points to both end of double linked list)
 # use re-insert to update order
 class LRUCache:
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.cache = {} # key -> Node
-        init_node = Node(0, 0)
-        self.head = init_node
-        self.tail = init_node
+        self.cache = {}  # key -> Node
+        self.head = Node(0, 0)  # as dummy node
+        self.tail = Node(0, 0)
+        # head=LRU, tail=MRU
+        # head(0, 0) <-> tail(0, 0)
         self.head.next = self.tail
         self.tail.prev = self.head
 
     def get(self, key: int) -> int:
         if key in self.cache:
+            # update MRU for key
             self.remove(self.cache[key])
             self.insertAtTail(self.cache[key])
             return self.cache[key].value
@@ -46,15 +49,4 @@ class LRUCache:
         next_node = self.tail
         prev_node.next = node
         next_node.prev = node
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,18 +1,33 @@
 package binarysearch;
 
 public class FindMinInRotatedSortedArray {
-    public int findMin(int[] nums) {
-        int i = 0;
-        int j = nums.length - 1;
-        while (i < j ) {
-            int m = (i + j) / 2;
-            if (nums[m] > nums[j]) {
-                i = m + 1;
+    public int findMin2(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
             } else {
-                j = m;
+                right = mid;
             }
         }
-        return nums[i];
+        return nums[left];
+    }
+
+    public int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[right] < nums[mid]) {  // search right
+                left = mid + 1;  // mid itself is definite not the answer
+            } else {  // mid ~ right is sorted correctly, so search left.
+                // it is possible that mid itself is answer, so it needs to include mid
+                right = mid;
+            }
+        }
+        return nums[left];
     }
 
     public static void main(String[] args) {
