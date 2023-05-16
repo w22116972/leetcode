@@ -31,7 +31,7 @@ public class RemoveDuplicate {
         int deduplicateIndex = 1;
         while (traversalIndex < arr.length) {
             if (arr[traversalIndex] != arr[deduplicateIndex]) {
-                arr[deduplicateIndex-1] = arr[traversalIndex];
+                arr[deduplicateIndex - 1] = arr[traversalIndex];
                 deduplicateIndex++;
             }
             traversalIndex++;
