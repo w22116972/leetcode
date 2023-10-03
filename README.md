@@ -1,7 +1,10 @@
 # Coding Interview Pattern
 
+This repository contains notes and solution to Leetcode questions and lists common patterns for similar questions.  
+
 
 [Linked List](docs/LinkedList.md)
+
 [Monotonic Stack](docs/Monotonic%20Stack.md)
 
 
