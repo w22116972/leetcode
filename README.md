@@ -1,8 +1,19 @@
-# coding-interview-pattern
+# Coding Interview Pattern
+
+This repository contains notes and solution to Leetcode questions and lists common patterns for similar questions.  
 
 
-[[Array.md]]
+[Linked List](docs/LinkedList.md)
 
-[[src/main/java/backtracking/Array.md]]
+[Monotonic Stack](docs/Monotonic%20Stack.md)
 
-[test](src/main/java/array/Array.md.md)
+
+---
+## Using Obsidian as reader
+
+This repo could be used by Obsidian to display the graph view of question patterns.
+
+### Steps
+
+1. Preferences -> Files & Links -> Disable `Use [[Wikilinks]]` and Enable `Detect all file extensions`
+

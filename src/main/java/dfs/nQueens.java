@@ -8,15 +8,18 @@ public class nQueens {
     public List<List<String>> solveNQueens(int n) {
         // init result
         final List<List<String>> result = new ArrayList<>();
-        // init board
+        dfs(buildBoard(n), 0, result);
+        return result;
+    }
+
+    private char[][] buildBoard(int n) {
         char[][] board = new char[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 board[i][j] = '.';
             }
         }
-        dfs(board, 0, result);
-        return result;
+        return board;
     }
 
     public List<String> createResultFromBoard(char[][] board) {
@@ -37,6 +40,7 @@ public class nQueens {
         if (row == n) { // reaches bottom
             // put board into result
             result.add(createResultFromBoard(board));
+            return;
         }
         // column as choices
         for (int col = 0; col < n; col++) {
