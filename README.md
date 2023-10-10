@@ -7,6 +7,9 @@ This repository contains notes and solution to Leetcode questions and lists comm
 
 [Monotonic Stack](docs/Monotonic%20Stack.md)
 
+## Company Questions
+
+[Tiktok](docs/Tiktok.md)
 
 ---
 ## Using Obsidian as reader
