@@ -39,3 +39,10 @@ for (int element: array) {
 }
 ```
 
+### Example Questions
+
+[496. Next Greater Element I](496.%20Next%20Greater%20Element%20I.md)
+
+[739. Daily Temperatures](739.%20Daily%20Temperatures.md)
+
+[2487. Remove Nodes From Linked List](2487.%20Remove%20Nodes%20From%20Linked%20List.md)
