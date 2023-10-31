@@ -47,4 +47,3 @@ for (int element: array) {
 
 [2487. Remove Nodes From Linked List](2487.%20Remove%20Nodes%20From%20Linked%20List.md)
 
-[1047. Remove All Adjacent Duplicates In String](1047.%20Remove%20All%20Adjacent%20Duplicates%20In%20String.md)
