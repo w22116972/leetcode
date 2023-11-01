@@ -47,3 +47,4 @@ for (int element: array) {
 
 [2487. Remove Nodes From Linked List](2487.%20Remove%20Nodes%20From%20Linked%20List.md)
 
+[402. Remove K Digits](402.%20Remove%20K%20Digits.md)
