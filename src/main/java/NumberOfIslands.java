@@ -1,146 +1,96 @@
 import java.util.*;
 
+/**
+ * There are 3 ways to mark a cell as visited: 1. Hashset 2. Boolean 2D array 3. dummy value
+ * Space complexity of 3 ways: 1. O(mn) 2. O(mn) 3. O(1)
+ * Here I choose the 3rd way to mark a cell as visited.
+ */
 public class NumberOfIslands {
-    HashSet<String> visited = new HashSet<>();
+    private static final char VISITED_CELL = '-';
 
-    public int numIslands(char[][] grid) {
-        if (grid == null) {
-            return 0;
-        }
-
-        int count = 0;
-
-
-        final int totalRows = grid.length;
-        final int totalCols = grid[0].length;
-
-        for (int row = 0; row < totalRows; row++) {
-            for (int col = 0; col < totalCols; col++) {
-                if (Objects.equals(grid[row][col], '1') &&
-                        !visited.contains(row + "," + col)) {
-                    bfs(row, col, grid);
-                    count += 1;
-                }
-            }
-
-        }
-        return count;
+    private boolean isCellVisited(char[][] grid, int row, int col) {
+        return grid[row][col] == VISITED_CELL;
     }
 
-    // ---
-
-    // Mark visited nodes as -1
-    public int sol(char[][] grid) {
-        if (grid == null) {
-            return 0;
-        }
-        int islandsCount = 0;
-        final int totalRows = grid.length;
-        final int totalCols = grid[0].length;
-
-        for (int row = 0; row < totalRows; row++) {
-            for (int col = 0; col < totalCols; col++) {
-                if (isLand(grid, row, col)) {
-                    exploreThisIsland(grid, row, col);
-                    islandsCount += 1;
-                }
-            }
-        }
-        return islandsCount;
-    }
-
-    public void exploreThisIsland(char[][] grid, int i, int j) {
-        Queue<int[]> toBeVisitedLocations = new LinkedList<>();
-        toBeVisitedLocations.add(new int[]{i, j});
-
-        while (!toBeVisitedLocations.isEmpty()) {
-            final int[] currentLocation = toBeVisitedLocations.poll();
-            final int currentRow = currentLocation[0];
-            final int currentCol = currentLocation[1];
-
-            if (!isValidLocation(grid, currentRow, currentCol) ||
-                    isWater(grid, currentRow, currentCol) ||
-                    isVisited(grid, currentRow, currentCol)) {
-                continue;
-            }
-            // mark visited
-            grid[currentRow][currentCol] = '-';
-            // put neighbors to queue of toBeVisitedLocations
-            toBeVisitedLocations.add(new int[]{currentRow + 1, currentCol});
-            toBeVisitedLocations.add(new int[]{currentRow - 1, currentCol});
-            toBeVisitedLocations.add(new int[]{currentRow, currentCol + 1});
-            toBeVisitedLocations.add(new int[]{currentRow, currentCol - 1});
-        }
-    }
-
-    private boolean isValidLocation(char[][] grid, int row, int col) {
+    private boolean isCellValid(char[][] grid, int row, int col) {
         final int totalRows = grid.length;
         final int totalCols = grid[0].length;
         return row >= 0 && col >= 0 && row < totalRows && col < totalCols;
     }
 
-    private boolean isLand(char[][] grid, int row, int col) {
+    private boolean isCellLand(char[][] grid, int row, int col) {
         return grid[row][col] == '1';
     }
 
-    private boolean isWater(char[][] grid, int row, int col) {
+    private boolean isCellWater(char[][] grid, int row, int col) {
         return grid[row][col] == '0';
     }
 
-    private boolean isVisited(char[][] grid, int row, int col) {
-        return grid[row][col] == '-';
-    }
-
-
-    // ---
-
-    private List<Point> directions = List.of(new Point(1, 0), new Point(-1, 0),
-            new Point(0, 1), new Point(0, -1));
-
-    public void bfs(int row, int col, char[][] grid) {
+    // Use BFS to explore all the nodes in the same island
+    public int numIslands(char[][] grid) {
+        if (grid == null) {
+            return 0;
+        }
+        int numberOfIslands = 0;
         final int totalRows = grid.length;
         final int totalCols = grid[0].length;
+        for (int row = 0; row < totalRows; row++) {
+            for (int col = 0; col < totalCols; col++) {
 
-        visited.add(row + "," + col);
-        // use queue to explore same island
-        Queue<Point> queue = new LinkedList<>();
-        queue.add(new Point(row, col));
-        while (!queue.isEmpty()) {
-            final Point originPoint = queue.poll();
-            for (Point explorePoint: directions) {
-                int exploreRow = originPoint.row + explorePoint.row;
-                int exploreCol = originPoint.col + explorePoint.col;
-                if (exploreRow >= 0 && exploreRow < totalRows && exploreCol >= 0 && exploreCol < totalCols &&
-                grid[exploreRow][exploreCol] == '1' && !visited.contains(exploreRow + "," + exploreCol)) {
-                    queue.add(new Point(exploreRow, exploreCol));
-                    visited.add(exploreRow + "," + exploreCol);
+                if (isCellLand(grid, row, col) && !isCellVisited(grid, row, col)) {
+                    markVisitedByBFS(grid, row, col);
+                    numberOfIslands += 1;
                 }
             }
-
         }
-
+        return numberOfIslands;
     }
 
-    static class Point {
-        Integer row;
-        Integer col;
 
-        public Point(Integer row, Integer col) {
+    public static class Cell {
+        int row;
+        int col;
+
+        public Cell(int row, int col) {
             this.row = row;
             this.col = col;
         }
+    }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Point point = (Point) o;
-            return Objects.equals(this.row, point.row) && Objects.equals(this.col, point.col);
-        }
+    public void markVisitedByBFS(char[][] grid, int row, int col) {
+        Queue<Cell> nextVisitCells = new LinkedList<>();
+        nextVisitCells.add(new Cell(row, col));
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(row, col);
+        while (!nextVisitCells.isEmpty()) {
+            final Cell cell = nextVisitCells.poll();
+
+            if (!isCellValid(grid, cell.row, cell.col) ||
+                    isCellWater(grid, cell.row, cell.col) ||
+                    isCellVisited(grid, cell.row, cell.col)) {
+                continue;
+            }
+            // mark visited cell by dummy value
+            grid[row][col] = VISITED_CELL;
+            // put neighbors to queue of nextVisitCells
+            nextVisitCells.add(new Cell(cell.row + 1, cell.col));
+            nextVisitCells.add(new Cell(cell.row - 1, cell.col));
+            nextVisitCells.add(new Cell(cell.row, cell.col + 1));
+            nextVisitCells.add(new Cell(cell.row, cell.col - 1));
         }
+    }
+
+    public void markVisitedByDFS(char[][] grid, int row, int col) {
+        if (!isCellValid(grid, row, col) ||
+                isCellWater(grid, row, col) ||
+                isCellVisited(grid, row, col)) {
+            return;
+        }
+        // mark visited cell by dummy value
+        grid[row][col] = VISITED_CELL;
+        // put neighbors to queue of nextVisitCells
+        markVisitedByDFS(grid, row + 1, col);
+        markVisitedByDFS(grid, row - 1, col);
+        markVisitedByDFS(grid, row, col + 1);
+        markVisitedByDFS(grid, row, col - 1);
     }
 }
