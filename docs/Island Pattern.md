@@ -13,3 +13,8 @@ Use BFS or DFS to traverse 2D array.
 3. If this cell is not visited, mark it as visited and do something
    - For example, use DFS or BFS to explore the cell
 
+
+### Questions
+
+[Number of Islands](200.%20Number%20of%20Islands.md)
+[Max Area of Island](695.%20Max%20Area%20of%20Island.md)
