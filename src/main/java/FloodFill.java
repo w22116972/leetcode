@@ -2,30 +2,48 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class FloodFill {
-    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{sr, sc});
+    public int[][] floodFillDFS(int[][] image, int sr, int sc, int color) {
+        final int startingColor = image[sr][sc];
+        if (color == startingColor) {
+            return image;
+        }
+        return floodFillDFSHelper(image, sr, sc, color, startingColor);
+    }
 
-        final int srcColor = image[sr][sc];
-        if (color == srcColor) {
+    public int[][] floodFillDFSHelper(int[][] image, int row, int col, int color, int startingColor) {
+        if (!isValid(image, row, col) || !isSameColor(image, row, col, startingColor)) {
+            return image;
+        }
+        image[row][col] = color;
+        floodFillDFSHelper(image, row + 1, col, color, startingColor);
+        floodFillDFSHelper(image, row - 1, col, color, startingColor);
+        floodFillDFSHelper(image, row, col + 1, color, startingColor);
+        floodFillDFSHelper(image, row, col - 1, color, startingColor);
+        return image;
+    }
+
+
+    public int[][] floodFillBFS(int[][] image, int sr, int sc, int color) {
+        final int startingColor = image[sr][sc];
+        if (color == startingColor) {
             return image;
         }
 
-        while (!queue.isEmpty()) {
-            final int[] currentLocation = queue.poll();
-            final int row = currentLocation[0];
-            final int col = currentLocation[1];
+        Queue<Cell> nextVisitCells = new LinkedList<>();
+        nextVisitCells.add(new Cell(sr, sc));
+        while (!nextVisitCells.isEmpty()) {
+            final Cell cell = nextVisitCells.poll();
 
-            if (!isValid(image, row, col) || !isSameColor(image, row, col, srcColor)) {
+            if (!isValid(image, cell.row, cell.col) || !isSameColor(image, cell.row, cell.col, startingColor)) {
                 continue;
             }
 
-            image[row][col] = color;
+            image[cell.row][cell.col] = color;
 
-            queue.add(new int[]{row + 1, col});
-            queue.add(new int[]{row - 1, col});
-            queue.add(new int[]{row, col + 1});
-            queue.add(new int[]{row, col - 1});
+            nextVisitCells.add(new Cell(cell.row + 1, cell.col));
+            nextVisitCells.add(new Cell(cell.row - 1, cell.col));
+            nextVisitCells.add(new Cell(cell.row, cell.col + 1));
+            nextVisitCells.add(new Cell(cell.row, cell.col - 1));
         }
         return image;
     }
@@ -38,5 +56,15 @@ public class FloodFill {
 
     private boolean isSameColor(int[][] image, int row, int col, int color) {
         return image[row][col] == color;
+    }
+
+    public static class Cell {
+        int row;
+        int col;
+
+        public Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
     }
 }
