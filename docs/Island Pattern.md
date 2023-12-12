@@ -19,3 +19,4 @@ Use BFS or DFS to traverse 2D array.
 [Number of Islands](200.%20Number%20of%20Islands.md)
 [Max Area of Island](695.%20Max%20Area%20of%20Island.md)
 [Flood Fill](733.%20Flood%20Fill.md)
+[Number of Closed Islands](1254.%20Number%20of%20Closed%20Islands.md)
