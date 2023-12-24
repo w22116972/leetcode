@@ -10,74 +10,101 @@ public class IslandPerimeter {
     public int islandPerimeter(int[][] grid) {
         final int totalRows = grid.length;
         final int totalCols = grid[0].length;
-        int count = 0;
+        int landPerimeter = 0;
         for (int row = 0; row < totalRows; row++) {
             for (int col = 0; col < totalCols; col++) {
-                if (isLand(grid, row, col)) {
-                    count += countPerimeter(grid, row, col);
+                if (!isCellVisited(grid, row, col) && isCellLand(grid, row, col)) {
+                    landPerimeter += countPerimeterBFS(grid, row, col);
                 }
-
             }
         }
-
-        return count;
+        return landPerimeter;
     }
 
-    private int countPerimeter(int[][] grid, int row, int col) {
-        int perimeter = 0;
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{row, col});
+    private static class Cell {
+        int row;
+        int col;
 
-        while (!queue.isEmpty()) {
-            final int[] poll = queue.poll();
-            final int x = poll[0];
-            final int y = poll[1];
-            if (isVisited(grid, x, y)) {
+        public Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    private int countPerimeterDFS(int[][] grid, int row, int col) {
+        if (!isCellInGrid(grid, row, col) || isCellWater(grid, row, col)) {
+            return 1;
+        }
+
+        if (isCellVisited(grid, row, col)) {
+            return 0;
+        }
+
+        grid[row][col] = VISITED;
+
+        return countPerimeterDFS(grid, row + 1, col) +
+                countPerimeterDFS(grid, row - 1, col) +
+                countPerimeterDFS(grid, row, col + 1) +
+                countPerimeterDFS(grid, row, col - 1);
+    }
+
+    private int countPerimeterBFS(int[][] grid, int row, int col) {
+        int perimeter = 0;
+        Queue<Cell> nextVisitCells = new LinkedList<>();
+        nextVisitCells.add(new Cell(row, col));
+        while (!nextVisitCells.isEmpty()) {
+            final Cell cell = nextVisitCells.poll();
+            if (isCellVisited(grid, cell.row, cell.col) || isCellWater(grid, cell.row, cell.col)) {
                 continue;
             }
 
-            if (!isInGrid(grid, x + 1, y) || isWater(grid, x + 1, y)) {
+            if (!isCellInGrid(grid, cell.row + 1, cell.col) || isCellWater(grid, cell.row + 1, cell.col)) {
                 perimeter++;
-            } else if (isLand(grid, x + 1, y)) {
-                queue.add(new int[]{x + 1, y});
+            }
+            if (isCellInGrid(grid, cell.row + 1, cell.col) && isCellLand(grid, cell.row + 1, cell.col)) {
+                nextVisitCells.add(new Cell(cell.row + 1, cell.col));
             }
 
-            if (!isInGrid(grid, x - 1, y) || isWater(grid, x - 1, y)) {
+
+            if (!isCellInGrid(grid, cell.row - 1, cell.col) || isCellWater(grid, cell.row - 1, cell.col)) {
                 perimeter++;
-            } else if ( isLand(grid, x - 1, y)) {
-                queue.add(new int[]{x - 1, y});
+            }
+            if (isCellInGrid(grid, cell.row - 1, cell.col) && isCellLand(grid, cell.row - 1, cell.col)) {
+                nextVisitCells.add(new Cell(cell.row - 1, cell.col));
             }
 
-            if (!isInGrid(grid, x, y + 1) || isWater(grid, x, y + 1)) {
+            if (!isCellInGrid(grid, cell.row, cell.col + 1) || isCellWater(grid, cell.row, cell.col + 1)) {
                 perimeter++;
-            } else if (isLand(grid, x, y + 1)){
-                queue.add(new int[]{x, y + 1});
+            }
+            if (isCellInGrid(grid, cell.row, cell.col + 1) && isCellLand(grid, cell.row, cell.col + 1)) {
+                nextVisitCells.add(new Cell(cell.row, cell.col + 1));
             }
 
-            if (!isInGrid(grid, x, y + 1) || isWater(grid, x, y - 1)) {
+            if (!isCellInGrid(grid, cell.row, cell.col - 1) || isCellWater(grid, cell.row, cell.col - 1)) {
                 perimeter++;
-            } else if (isLand(grid, x, y - 1)) {
-                queue.add(new int[]{x, y - 1});
             }
-            grid[x][y] = VISITED;
+            if (isCellInGrid(grid, cell.row, cell.col - 1) && isCellLand(grid, cell.row, cell.col - 1)) {
+                nextVisitCells.add(new Cell(cell.row, cell.col - 1));
+            }
+
+            grid[cell.row][cell.col] = VISITED;
         }
-
         return perimeter;
     }
 
-    private static boolean isInGrid(int[][]grid, int row, int col) {
+    private static boolean isCellInGrid(int[][]grid, int row, int col) {
         return row >= 0 && col >= 0 && row < grid.length && col < grid[0].length;
     }
 
-    private static boolean isLand(int[][]grid, int row, int col) {
+    private static boolean isCellLand(int[][]grid, int row, int col) {
         return grid[row][col] == LAND;
     }
 
-    private static boolean isWater(int[][]grid, int row, int col) {
+    private static boolean isCellWater(int[][]grid, int row, int col) {
         return grid[row][col] == WATER;
     }
 
-    private static boolean isVisited(int[][]grid, int row, int col) {
+    private static boolean isCellVisited(int[][]grid, int row, int col) {
         return grid[row][col] == VISITED;
     }
 }
