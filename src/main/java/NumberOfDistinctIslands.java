@@ -5,9 +5,7 @@ import java.util.Set;
 
 public class NumberOfDistinctIslands {
 
-    // 用一個Set存放不同的島嶼 (存放內容可以是用字串串接)
-    // 每次走訪時，如果是 land就把該land的座標減去起點的座標，即可得到相對座標
-
+    // Use coordinate relative to the starting point to build the island path
     public int numberofDistinctIslands(int[][] grid) {
         final int totalRows = grid.length;
         final int totalCols = grid[0].length;
@@ -16,34 +14,120 @@ public class NumberOfDistinctIslands {
 
         for (int row = 0; row < totalRows; row++) {
             for (int col = 0; col < totalCols; col++) {
-                if (isLand(grid, row, col)) {
-                    distinctIslands.add(buildIslandPath(grid, row, col));
+                if (isLand(grid, row, col) && !isVisited(grid, row, col)) {
+                    distinctIslands.add(buildIslandPathByCoordinateBFS(grid, row, col));
                 }
             }
         }
-
         return distinctIslands.size();
     }
 
-    private String buildIslandPath(int[][] grid, int startRow, int startCol) {
-        StringBuilder path = new StringBuilder();
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{startRow, startCol});
-        while (!queue.isEmpty()) {
-            final int[] location = queue.poll();
-            final int row = location[0];
-            final int col = location[1];
+    // Use direction to build the island path
+    // O: origin, R: right, L: left, U: up, D: down
+    public int numberofDistinctIslands2(int[][] grid) {
+        final int totalRows = grid.length;
+        final int totalCols = grid[0].length;
+        Set<String> distinctIslands = new HashSet<>();
 
-            if (!isInGrid(grid, row, col) || isVisited(grid, row, col) || isWater(grid, row, col)) {
+        for (int row = 0; row < totalRows; row++) {
+            for (int col = 0; col < totalCols; col++) {
+                if (isLand(grid, row, col) && !isVisited(grid, row, col)) {
+                    distinctIslands.add(buildIslandPathByCoordinateDFS(grid, row, col));
+                }
+            }
+        }
+        return distinctIslands.size();
+    }
+
+    public static class Cell {
+        int row;
+        int col;
+
+        public Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    // use BFS + coordinate relative to the starting point to build the island path
+    private String buildIslandPathByCoordinateBFS(int[][] grid, int row, int col) {
+        StringBuilder path = new StringBuilder();
+        Queue<Cell> queue = new LinkedList<>();
+        queue.add(new Cell(row, col));
+        while (!queue.isEmpty()) {
+            final Cell cell = queue.poll();
+            if (!isInGrid(grid, cell.row, cell.col) || isVisited(grid, cell.row, cell.col) || isWater(grid, cell.row, cell.col)) {
                 continue;
             }
-            // is land
-            grid[row][col] = VISITED;
-            path.append("[").append(row - startRow).append(",").append(col - startCol).append("]");
-            queue.add(new int[]{row + 1, col});
-            queue.add(new int[]{row - 1, col});
-            queue.add(new int[]{row, col + 1});
-            queue.add(new int[]{row, col - 1});
+            grid[cell.row][cell.col] = VISITED;
+            path.append("[").append(cell.row - row).append(",").append(cell.col - col).append("]");
+            queue.add(new Cell(cell.row + 1, cell.col));
+            queue.add(new Cell(cell.row - 1, cell.col));
+            queue.add(new Cell(cell.row, cell.col + 1));
+            queue.add(new Cell(cell.row, cell.col - 1));
+        }
+        return path.toString();
+    }
+
+    // use DFS + coordinate relative to the starting point to build the island path
+    private String buildIslandPathByCoordinateDFS(int[][] grid, int row, int col) {
+        StringBuilder path = new StringBuilder();
+        if (!isInGrid(grid, row, col) || isVisited(grid, row, col) || isWater(grid, row, col)) {
+            return path.toString();
+        }
+        grid[row][col] = VISITED;
+        path.append("[").append(row).append(",").append(col).append("]");
+        path.append(buildIslandPathByCoordinateDFS(grid, row + 1, col));
+        path.append(buildIslandPathByCoordinateDFS(grid, row - 1, col));
+        path.append(buildIslandPathByCoordinateDFS(grid, row, col + 1));
+        path.append(buildIslandPathByCoordinateDFS(grid, row, col - 1));
+        return path.toString();
+    }
+
+    // use DFS + direction to build the island path
+    private String buildIslandPathByDirectionDFS(int[][] grid, int row, int col, char direction) {
+        StringBuilder path = new StringBuilder();
+        if (!isInGrid(grid, row, col) || isVisited(grid, row, col) || isWater(grid, row, col)) {
+            return path.toString();
+        }
+        grid[row][col] = VISITED;
+        path.append(direction);
+        path.append(buildIslandPathByDirectionDFS(grid, row + 1, col, 'D'));
+        path.append(buildIslandPathByDirectionDFS(grid, row - 1, col, 'U'));
+        path.append(buildIslandPathByDirectionDFS(grid, row, col + 1, 'R'));
+        path.append(buildIslandPathByDirectionDFS(grid, row, col - 1, 'L'));
+        path.append("B");
+        return path.toString();
+    }
+
+    // convert above function into BFS
+    private String buildIslandPathByDirectionBFS(int[][] grid, int row, int col) {
+        StringBuilder path = new StringBuilder();
+        Queue<Cell> queue = new LinkedList<>();
+        queue.add(new Cell(row, col));
+        path.append("O");
+        while (!queue.isEmpty()) {
+            final Cell cell = queue.poll();
+            if (!isInGrid(grid, cell.row, cell.col) || isVisited(grid, cell.row, cell.col) || isWater(grid, cell.row, cell.col)) {
+                continue;
+            }
+            grid[cell.row][cell.col] = VISITED;
+            if (isInGrid(grid, cell.row + 1, cell.col) && isLand(grid, cell.row + 1, cell.col)) {
+                queue.add(new Cell(cell.row + 1, cell.col));
+                path.append("D");
+            }
+            if (isInGrid(grid, cell.row - 1, cell.col) && isLand(grid, cell.row - 1, cell.col)) {
+                queue.add(new Cell(cell.row - 1, cell.col));
+                path.append("U");
+            }
+            if (isInGrid(grid, cell.row, cell.col + 1) && isLand(grid, cell.row, cell.col + 1)) {
+                queue.add(new Cell(cell.row, cell.col + 1));
+                path.append("R");
+            }
+            if (isInGrid(grid, cell.row, cell.col - 1) && isLand(grid, cell.row, cell.col - 1)) {
+                queue.add(new Cell(cell.row, cell.col - 1));
+                path.append("L");
+            }
         }
         return path.toString();
     }

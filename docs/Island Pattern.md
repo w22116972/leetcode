@@ -25,3 +25,5 @@ Use BFS or DFS to traverse 2D array.
 [Number of Closed Islands](1254.%20Number%20of%20Closed%20Islands.md)
 
 [Island Perimeter](463.%20Island%20Perimeter.md)
+
+[Number of Distinct Islands](694.%20Number%20of%20Distinct%20Islands.md)
