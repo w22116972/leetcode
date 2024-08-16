@@ -10,7 +10,7 @@
 
 - [ ] [191. Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 
-- [ ] [1. Two Sum](https://leetcode.com/problems/two-sum/)
+- [x] [1. Two Sum](https://leetcode.com/problems/two-sum/)
 
 - [ ] [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
 
