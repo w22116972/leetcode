@@ -1,4 +1,4 @@
-# Coding Interview Pattern
+# Leetcode
 
 This repository contains notes and solution to Leetcode questions and lists common patterns for similar questions.  
 
