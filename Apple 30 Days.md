@@ -14,7 +14,7 @@
 
 - [ ] [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
 
-- [ ] [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+- [x] [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 
 - [ ] [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
@@ -26,7 +26,7 @@
 
 - [ ] [4. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
-- [ ] [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/)
+- [x] [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/)
 
 - [ ] [14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
 
@@ -80,7 +80,7 @@
 
 - [ ] [284. Peeking Iterator](https://leetcode.com/problems/peeking-iterator/)
 
-- [ ] [383. Ransom Note](https://leetcode.com/problems/ransom-note/)
+- [x] [383. Ransom Note](https://leetcode.com/problems/ransom-note/)
 
 - [ ] [565. Array Nesting](https://leetcode.com/problems/array-nesting/)
 
