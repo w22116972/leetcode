@@ -1,5 +1,10 @@
 package solution;
 
+/**
+ * The words are separated by one or more spaces and returned string should only have a single space separating the words.
+ * When using split(" ") on `  ` double space, it will return an empty string.
+ * So, we need to check if the split word is empty before appending it to the result.
+ */
 public class ReverseWordsInAString {
     public String reverseWords(String s) {
         String[] splitWords = s.split(" ");
@@ -15,6 +20,8 @@ public class ReverseWordsInAString {
     }
 
     // follow-up: use in-place with S(n) = O(1)
+    // In Java, strings are immutable, so we can't modify the input string in-place.
+    // We can convert the string to a char array and reverse the whole string and then reverse each word.
     public String reverseWordsInPlace(String s) {
         char[] chars = s.toCharArray();
         int n = chars.length;

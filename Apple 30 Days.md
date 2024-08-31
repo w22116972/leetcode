@@ -12,13 +12,13 @@
 
 - [x] [1. Two Sum](https://leetcode.com/problems/two-sum/)
 
-- [ ] [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
+- [x] [48. Rotate Image](https://leetcode.com/problems/rotate-image/)
 
 - [x] [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 
 - [ ] [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
-- [ ] [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
+- [x] [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
 
 - [ ] [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/)
 
