@@ -2,6 +2,7 @@ package solution;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 1. Two Sum
@@ -33,18 +34,28 @@ public class TwoSum {
         // Declare two pointers
         int left = 0;
         int right = sortedNums.length - 1;
+
+        // Store the number to index mapping, use a list to store the indices with the same number
+        HashMap<Integer, List<Integer>> indexMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (!indexMap.containsKey(nums[i])) {
+                indexMap.put(nums[i], List.of(i));
+            } else {
+                List<Integer> indices = indexMap.get(nums[i]);
+                indices.add(i);
+                indexMap.put(nums[i], indices);
+            }
+        }
+
         while (left < right) {
             int sum = sortedNums[left] + sortedNums[right];
             if (sum == target) {
-                // Find the indices of the two numbers
-                int leftIndex = -1;
-                int rightIndex = -1;
-                for (int i = 0; i < nums.length; i++) {
-                    if (nums[i] == sortedNums[left] && leftIndex == -1) {
-                        leftIndex = i;
-                    } else if (nums[i] == sortedNums[right] && rightIndex == -1) {
-                        rightIndex = i;
-                    }
+                // Get the indices of the two numbers
+                int leftIndex = indexMap.get(sortedNums[left]).get(0);
+                int rightIndex = indexMap.get(sortedNums[right]).get(0);
+                // If the two numbers are the same, get the second index from the list
+                if (sortedNums[left] == sortedNums[right]) {
+                    rightIndex = indexMap.get(sortedNums[right]).get(1);
                 }
                 return new int[]{leftIndex, rightIndex};
             } else if (sum < target) {
