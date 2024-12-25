@@ -1,4 +1,4 @@
-package string;
+package solution;
 
 public class ValidPalindrome {
 
@@ -6,18 +6,18 @@ public class ValidPalindrome {
     public boolean sol(String s) {
         String lowS = s.toLowerCase();
 
-        int i = 0;
-        int j = s.length() - 1;
-        while (i < j) {
-            if (!isCharValid(lowS.charAt(i))) {
-                i++;
-            } else if (!isCharValid(lowS.charAt(j))) {
-                j--;
-            } else if (lowS.charAt(i) != lowS.charAt(j)) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            if (!isCharValid(lowS.charAt(left))) {
+                left++;
+            } else if (!isCharValid(lowS.charAt(right))) {
+                right--;
+            } else if (lowS.charAt(left) != lowS.charAt(right)) {
                 return false;
             } else {
-                i++;
-                j--;
+                left++;
+                right--;
             }
         }
         return true;
