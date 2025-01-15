@@ -1,6 +1,6 @@
 package solution;
 
-public class ContainerWithMostWater {
+public class ContainerWithMostWaterByTwoPointers {
     public int maxArea(int[] height) {
         if (height.length == 0) {
             return 0;
@@ -18,5 +18,12 @@ public class ContainerWithMostWater {
             }
         }
         return maxArea;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Tests an empty array.\n" +
+                " Input: height=[]\n" +
+                " Expected output: 0\n" +
+                " Actual output");
     }
 }

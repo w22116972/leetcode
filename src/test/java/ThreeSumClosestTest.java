@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import solution.ThreeSumClosest;
+
 //Given an array of unsorted numbers and a target number,
 // find a triplet sum in the array whose sum is as close to the target number as possible
 public class ThreeSumClosestTest {
