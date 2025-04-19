@@ -1,11 +1,18 @@
 # Leetcode
 
-This repository contains notes and solution to Leetcode questions and lists common patterns for similar questions.  
+This repository contains notes and leetcode to Leetcode questions and lists common patterns for similar questions.  
 
 
 [Linked List](docs/LinkedList.md)
 
 [Monotonic Stack](docs/Monotonic%20Stack.md)
+
+
+## Guidelines
+
+- should explain time complexity and space complexity
+- should explain the tradeoff between usage of data structure or algorithm
+- should prepare "how would you unit test the code your write"
 
 ## Company Questions
 
@@ -24,7 +31,7 @@ This repo could be used by Obsidian to display the graph view of question patter
 
 ## How to effectively manage test cases
 
-Assume we have 2 solution for the same question, called `SolByA`, `SolByB`
+Assume we have 2 leetcode for the same question, called `SolByA`, `SolByB`
 
 ```java
 public class ProblemXXXTest {

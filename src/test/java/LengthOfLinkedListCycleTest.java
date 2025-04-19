@@ -2,7 +2,7 @@ import datastructure.ListNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import solution.LengthOfLinkedListCycle;
+import leetcode.LengthOfLinkedListCycle;
 
 public class LengthOfLinkedListCycleTest {
     public static Object[][] testData() {

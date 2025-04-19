@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import solution.ComparingStringsContainBackspaces;
+import leetcode.ComparingStringsContainBackspaces;
 
 public class ComparingStringsContainBackspacesTest {
     public static Object[][] testData() {
