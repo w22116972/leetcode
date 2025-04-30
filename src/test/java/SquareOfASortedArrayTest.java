@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import leetcode.SquareSortedArray;
+import leetcode.SquareOfASortedArray;
 
-public class SquareSortedArrayTest {
+public class SquareOfASortedArrayTest {
 
     public static Object[][] testData() {
         return new Object[][] {
@@ -15,19 +15,19 @@ public class SquareSortedArrayTest {
     @ParameterizedTest
     @MethodSource("testData")
     public void sol2(int[] arr, int[] answer) {
-        Assertions.assertArrayEquals(answer, SquareSortedArray.squareArray(arr));
+        Assertions.assertArrayEquals(answer, SquareOfASortedArray.squareArray(arr));
     }
 
     @ParameterizedTest
     @MethodSource("testData")
     public void sol(int[] arr, int[] answer) {
-        Assertions.assertArrayEquals(answer, SquareSortedArray.sol(arr));
+        Assertions.assertArrayEquals(answer, SquareOfASortedArray.sol(arr));
     }
 
 
     @ParameterizedTest
     @MethodSource("testData")
     public void practice(int[] arr, int[] answer) {
-        Assertions.assertArrayEquals(answer, SquareSortedArray.practice(arr));
+        Assertions.assertArrayEquals(answer, SquareOfASortedArray.practice(arr));
     }
 }

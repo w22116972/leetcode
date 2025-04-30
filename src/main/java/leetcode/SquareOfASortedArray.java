@@ -1,14 +1,39 @@
 package leetcode;
 
-//Problem Statement
-//        Given a sorted array, create a new array containing squares of all the number of the input array in the sorted order.
+/*
+* Given an integer array nums sorted in non-decreasing order,
+* return an array of the squares of each number sorted in non-decreasing order.
+* */
 //        Example 1:
 //        Input: [-2, -1, 0, 2, 3]
 //        Output: [0, 1, 4, 4, 9]
 //        Example 2:
 //        Input: [-3, -1, 0, 1, 2]
 //        Output: [0 1 1 4 9]
-public class SquareSortedArray {
+public class SquareOfASortedArray {
+
+    public static int[] sortedSquares(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        int[] result = new int[nums.length];
+        int index = result.length - 1;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            double leftSquare = Math.pow(nums[left], 2);
+            double rightSquare = Math.pow(nums[right], 2);
+            if (leftSquare >= rightSquare) {
+                result[index] = (int)leftSquare;
+                left++;
+            } else {
+                result[index] = (int)rightSquare;
+                right--;
+            }
+            index--;
+        }
+        return result;
+    }
 
     public static int[] squareArray(int[] arr) {
         int[] result = new int[arr.length];
