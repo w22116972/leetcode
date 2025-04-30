@@ -1,6 +1,8 @@
 package leetcode;
 
-public class SearchInsertPosition {
+// Time Complexity = O(log n), because we are using binary search to find the number
+// Space Complexity = O(1)
+public class LC_0035_SearchInsertPosition {
     public int searchInsert(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return 0;
@@ -19,10 +21,5 @@ public class SearchInsertPosition {
             }
         }
         return left;
-    }
-
-    public static void main(String[] args) {
-//        System.out.println(new SearchInsertPosition().searchInsert(new int[]{1, 3, 5, 6}, 7));
-        System.out.println(new SearchInsertPosition().searchInsert(new int[]{1, 2}, 2));
     }
 }
