@@ -1,5 +1,8 @@
 package leetcode;
 
+// Time complexity: O(n)
+// Space complexity: O(n), recursive stack
+// Use preorder traversal
 public class Q0226_InvertBinaryTree {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
