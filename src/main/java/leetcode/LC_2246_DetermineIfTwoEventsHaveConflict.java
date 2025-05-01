@@ -1,7 +1,7 @@
 package leetcode;
 
 // 2446. Determine if Two Events Have Conflict
-public class Q2246 {
+public class LC_2246_DetermineIfTwoEventsHaveConflict {
     public boolean haveConflict(String[] event1, String[] event2) {
         String start1 = event1[0];
         String end1 = event1[1];

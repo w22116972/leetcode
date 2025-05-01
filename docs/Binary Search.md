@@ -2,12 +2,13 @@
 
 > Sorted array + target value + O(logN) time complexity
 
+- [704. Binary Search](../src/main/java/leetcode/LC_0704_BinarySearch.java)
+
 ## TODO: Template
 
 
 #### Easy
 
-- [704. Binary Search](../src/main/java/leetcode/LC_0704_BinarySearch.java)
 - [374. Guess Number Higher or Lower](../src/main/java/leetcode/LC_0374_GuessNumberHigherOrLower.java)
 - [35. Search Insert Position](../src/main/java/leetcode/LC_0035_SearchInsertPosition.java)
 

@@ -1,13 +1,21 @@
 package leetcode;
 
+import java.util.Stack;
+
 // Time complexity: O(n)
 // Space complexity: O(n), recursive stack
 // Use preorder traversal
-public class Q0226_InvertBinaryTree {
+public class LC_0226_InvertBinaryTree_Iteratively {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return root;
         }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+
+        }
+
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
