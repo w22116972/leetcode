@@ -11,7 +11,8 @@ public class LC_0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
         if (preorder.length == 0 || inorder.length == 0) {
             return null;
         }
-        // Build a value->index map for inorder traversal
+        // To store the index of each value in the inorder array,
+        // so we can look them up in constant time. That avoids a linear scan every time
         inorderIndexMap = new HashMap<>();
         for (int i = 0; i < inorder.length; i++) {
             inorderIndexMap.put(inorder[i], i);
@@ -19,7 +20,10 @@ public class LC_0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
         return build(preorder, 0, preorder.length - 1, 0, inorder.length - 1);
     }
 
-    // Use preStart, preEnd as subrange of preorder and inStart, inEnd as subrange of inorder
+    // To solve this problem recursively,
+    // we need a helper function that takes additional parameters to track the current subrange of the preorder and inorder arrays we’re working with.
+    // The main function only receives the full arrays,
+    // so we create a separate recursive function with start and end indices to handle the subarrays efficiently without creating new arrays at each step
     /**
      * @param preorder the preorder traversal of the binary tree
      * @param preStart starting index of the current subtree in preorder
@@ -29,6 +33,7 @@ public class LC_0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
      * **/
 
     private TreeNode build(int[] preorder, int preStart, int preEnd, int inStart, int inEnd) {
+        // If the subtree is empty, so we return null
         if (preStart > preEnd || inStart > inEnd) {
             return null;
         }

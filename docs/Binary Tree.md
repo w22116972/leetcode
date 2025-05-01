@@ -1,5 +1,14 @@
 # Binary Tree
 
+
+## Traversal → Processing Order Analogy
+
+| Traversal Type | Processing Order        | Usage Pattern                                                                          |
+|----------------|-------------------------|----------------------------------------------------------------------------------------|
+| Pre-order      | Node → Left → Right     | **Top-down**: useful when you pass data from parent to children                        |
+| In-order       | Left → Node → Right     | Symmetric/Between-children processing, mostly for in-order access, especially in BSTs  |
+| Post-order     | Left → Right → Node     | **Bottom-up**: useful when you need results from children first                        |
+
 ### preorder traversal
 
 - [144. Binary Tree Preorder Traversal](../src/main/java/leetcode/LC_0144_BinaryTreePreorderTraversal.java)
@@ -7,7 +16,7 @@
   - swap left and right child then traverse the left and right child
 - [105. Construct Binary Tree from Preorder and Inorder Traversal](../src/main/java/leetcode/LC_0105_ConstructBinaryTreeFromPreorderAndInorderTraversal.java)
   - use preorder to find the root node, use inorder to find the left and right subtree
-
+  - use indices to track the range of the preorder and inorder array
 
 ### inorder traversal
 
@@ -16,6 +25,13 @@
 ### postorder traversal
 
 - [145. Binary Tree Postorder Traversal](../src/main/java/leetcode/LC_0145_BinaryTreePostorderTraversal.java)
+- [104. Maximum Depth of Binary Tree](../src/main/java/leetcode/LC_0104_MaximumDepthOfBinaryTree.java)
+  - use postorder to find the maximum depth of the left and right subtree, then return the maximum depth of the two subtrees + 1
+- [111. Minimum Depth of Binary Tree](../src/main/java/leetcode/LC_0111_MinimumDepthOfBinaryTree.java)
+  - for minimum depth, we need to check if the left or right subtree is null because if one of them is null, we need to return the depth of the other subtree + 1 (maximum depth question doesn't need to care about this)
+- [110. Balanced Binary Tree](../src/main/java/leetcode/LC_0110_BalancedBinaryTree.java)
+  - use postorder to find the maximum depth of the left and right subtree, then check if the difference between the two subtrees is less than or equal to 1
+
 
 ### level order traversal
 
