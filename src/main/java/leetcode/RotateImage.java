@@ -1,3 +1,5 @@
+package leetcode;
+
 public class RotateImage {
 
     // (0, 0) -> (0, n-1)
