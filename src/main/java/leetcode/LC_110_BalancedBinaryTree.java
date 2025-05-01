@@ -1,6 +1,6 @@
 package leetcode;
 
-public class LC_0110_BalancedBinaryTree {
+public class LC_110_BalancedBinaryTree {
 
     /**
      * To determine whether the binary tree is height-balanced,

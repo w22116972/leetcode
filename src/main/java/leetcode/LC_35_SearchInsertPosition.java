@@ -2,7 +2,7 @@ package leetcode;
 
 // Time Complexity = O(log n), because we are using binary search to find the number
 // Space Complexity = O(1)
-public class LC_0035_SearchInsertPosition {
+public class LC_35_SearchInsertPosition {
     public int searchInsert(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return 0;

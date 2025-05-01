@@ -3,7 +3,7 @@ package leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC_0105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
+public class LC_105_ConstructBinaryTreeFromPreorderAndInorderTraversal {
     private Map<Integer, Integer> inorderIndexMap;
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {

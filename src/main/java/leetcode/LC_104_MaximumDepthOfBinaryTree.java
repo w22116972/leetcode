@@ -1,6 +1,6 @@
 package leetcode;
 
-public class LC_0104_MaximumDepthOfBinaryTree {
+public class LC_104_MaximumDepthOfBinaryTree {
     public int maxDepth(TreeNode root) {
         return getDepth(root);
     }

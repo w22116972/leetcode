@@ -2,7 +2,7 @@ package leetcode;
 
 // Time Complexity = O(log n), because we are using binary search to find the number
 // Space Complexity = O(1)
-public class LC_0374_GuessNumberHigherOrLower {
+public class LC_374_GuessNumberHigherOrLower {
     public int guessNumber(int n) {
         int left = 1;
         int right = n;

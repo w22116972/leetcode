@@ -1,6 +1,6 @@
 package leetcode;
 
-public class LC_0069_Sqrt {
+public class LC_69_Sqrt {
     public int mySqrt(int x) {
         if (x < 2) {
             return x;

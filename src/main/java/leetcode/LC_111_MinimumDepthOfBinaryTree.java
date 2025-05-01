@@ -1,6 +1,6 @@
 package leetcode;
 
-public class LC_0111_MinimumDepthOfBinaryTree {
+public class LC_111_MinimumDepthOfBinaryTree {
     public int minDepth(TreeNode root) {
         return getMinDepth(root);
     }

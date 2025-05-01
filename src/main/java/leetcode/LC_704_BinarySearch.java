@@ -2,7 +2,7 @@ package leetcode;
 
 // Time Complexity = O(log n), because we are using binary search to find the number
 // Space Complexity = O(1)
-public class LC_0704_BinarySearch {
+public class LC_704_BinarySearch {
     public int search(int[] nums, int target) {
         int left = 0;
         int right = nums.length - 1;

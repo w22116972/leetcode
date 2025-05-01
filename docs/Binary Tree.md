@@ -21,6 +21,8 @@
 ### inorder traversal
 
 - [94. Binary Tree Inorder Traversal](../src/main/java/leetcode/LC_0094_BinaryTreeInorderTraversal.java)
+- [98. Validate Binary Search Tree](../src/main/java/leetcode/LC_98_ValidateBinarySearchTree.java)
+  - check the inorder of the BST is increasing
 
 ### postorder traversal
 

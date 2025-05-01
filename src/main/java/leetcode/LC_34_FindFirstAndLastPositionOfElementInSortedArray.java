@@ -7,7 +7,7 @@ package leetcode;
 * Time complexity is O(log n) for each binary search, so the overall time complexity is O(log n).
 * Space complexity is O(1) because we are using only a few extra variables.
 * */
-public class LC_0034_FindFirstAndLastPositionOfElementInSortedArray {
+public class LC_34_FindFirstAndLastPositionOfElementInSortedArray {
     public int[] searchRange(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return new int[]{-1, -1};

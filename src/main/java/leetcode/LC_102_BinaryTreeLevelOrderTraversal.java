@@ -7,7 +7,7 @@ import java.util.Queue;
 
 // Time Complexity = O(n), where n is the number of nodes in the tree
 // Space Complexity = O(h), where h is the height of the tree
-public class LC_0102_BinaryTreeLevelOrderTraversal {
+public class LC_102_BinaryTreeLevelOrderTraversal {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
