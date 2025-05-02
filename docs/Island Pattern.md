@@ -1,4 +1,4 @@
-# Island Pattern for Matrix Traverse
+#  Matrix Traverse for Island Pattern
 
 Use BFS or DFS to traverse 2D array.
 

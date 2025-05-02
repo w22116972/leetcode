@@ -20,7 +20,7 @@ For problems that we need to compare elements from different ends of the data st
 
 #### Easy
 
-- [344. Reverse String](../src/main/java/leetcode/LC_0344_ReverseString.java)
+- [344. Reverse String](../src/main/java/leetcode/LC_344_ReverseString.java)
 
 ### Unidirectional traversal
 
