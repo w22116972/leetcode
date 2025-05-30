@@ -1,6 +1,6 @@
 package leetcode;
 
-public class ValidPalindrome {
+public class LC_125_ValidPalindrome {
 
 
     public boolean sol(String s) {
@@ -29,9 +29,9 @@ public class ValidPalindrome {
 
 
     public static void main(String[] args) {
-        System.out.println("sol(\" \") = " + new ValidPalindrome().sol(" "));
-        System.out.println("sol(\" \") = " + new ValidPalindrome().sol("A man, a plan, a canal: Panama"));
-        System.out.println("sol(\" \") = " + new ValidPalindrome().sol("race a car"));
+        System.out.println("sol(\" \") = " + new LC_125_ValidPalindrome().sol(" "));
+        System.out.println("sol(\" \") = " + new LC_125_ValidPalindrome().sol("A man, a plan, a canal: Panama"));
+        System.out.println("sol(\" \") = " + new LC_125_ValidPalindrome().sol("race a car"));
     }
 
 }
