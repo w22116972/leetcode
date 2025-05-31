@@ -2,9 +2,9 @@ import datastructure.ListNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import leetcode.MiddleOfLinkedList;
+import leetcode.LC_876_MiddleOfLinkedList;
 
-public class MiddleOfLinkedListTest {
+public class LC876MiddleOfLinkedListTest {
     public static Object[][] testData() {
         final ListNode a = new ListNode(1);
         final ListNode b = new ListNode(2);
@@ -29,7 +29,7 @@ public class MiddleOfLinkedListTest {
     @ParameterizedTest
     @MethodSource("testData")
     public void sol(ListNode head, ListNode answer) {
-        Assertions.assertEquals(answer, MiddleOfLinkedList.sol(head));
+        Assertions.assertEquals(answer, LC_876_MiddleOfLinkedList.sol(head));
     }
 
 
