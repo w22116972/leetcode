@@ -1,4 +1,5 @@
 import datastructure.ListNode;
+import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,7 +30,8 @@ public class LC876MiddleOfLinkedListTest {
     @ParameterizedTest
     @MethodSource("testData")
     public void sol(ListNode head, ListNode answer) {
-        Assertions.assertEquals(answer, LC_876_MiddleOfLinkedList.sol(head));
+        val sol = new LC_876_MiddleOfLinkedList();
+        Assertions.assertEquals(answer, sol.middleNode(head));
     }
 
 
