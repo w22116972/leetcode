@@ -18,7 +18,7 @@ public class LC_202_HappyNumber {
     private int computeNum(int n) {
         int result = 0;
         while (n > 0) {
-            result += Math.pow((n % 10), 2);
+            result += (int) Math.pow((n % 10), 2);
             n /= 10;
         }
         return result;
