@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.HashSet;
+
 // Time complexity: O(n)
 // Space complexity: O(n), recursive stack
 // Use preorder traversal
