@@ -21,19 +21,20 @@ public class LC_54_SpiralMatrix {
 
         // Traverse the matrix in spiral order
         while (top <= bottom && left <= right) {
-            // Traverse from left to right along the top row
+            // Traverse from top left to top right
             for (int j = left; j <= right; j++) {
                 result.add(matrix[top][j]);
             }
             top++; // Move the top boundary down
 
-            // Traverse from top to bottom along the right column
+            // Traverse from top right to bottom right
             for (int i = top; i <= bottom; i++) {
                 result.add(matrix[i][right]);
             }
             right--; // Move the right boundary left
 
-            // Traverse from right to left along the bottom row, if still within bounds
+            // Traverse from bottom right t bottom o left
+            // if top++ is > bottom, then skip
             if (top <= bottom) {
                 for (int j = right; j >= left; j--) {
                     result.add(matrix[bottom][j]);
@@ -41,7 +42,8 @@ public class LC_54_SpiralMatrix {
                 bottom--; // Move the bottom boundary up
             }
 
-            // Traverse from bottom to top along the left column, if still within bounds
+            // Traverse from bottom left to top left
+            // if right-- is < left, then skip
             if (left <= right) {
                 for (int i = bottom; i >= top; i--) {
                     result.add(matrix[i][left]);
