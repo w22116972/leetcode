@@ -14,6 +14,7 @@ This repository contains notes and Leetcode questions and lists common patterns 
 
 [Monotonic Stack](docs/Monotonic%20Stack.md)
 
+[Graph](docs/graph.md)
 
 ## Guidelines
 
