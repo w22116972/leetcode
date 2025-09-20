@@ -26,12 +26,9 @@ class Solution:
             else:
                 num_count[n] = 1
 
-        count_to_num = [0] * (len(nums) + 1)
-        for (k, v) in num_count:
-            if len(count_to_num[v]) == 0:
-                count_to_num[v] = [k]
-            else:
-                count_to_num[v].append(k)
+        count_to_num = [[] for _ in range(len(nums) + 1)]
+        for num, freq in num_count.items():
+            count_to_num[freq].append(num)
         
         result = []
         for i in range(len(nums), -1, -1):
@@ -41,6 +38,5 @@ class Solution:
                     if len(result) == k:
                         return result
         return result
-        
 
         
